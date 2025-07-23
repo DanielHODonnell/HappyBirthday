@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday Chloe!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="cat2.jpg">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+<div class="card">
+    <div class="outside">
+        <div class="front">
+            <p>Happy Birthday Chloe!</p>
+            <div class="cake">
+                <div class="top-layer"></div>
+                <div class="middle-layer"></div>
+                <div class="bottom-layer"></div>
+                <div class="candle"></div>
+            </div>
+        </div>
+        <div class="back"></div>
+    </div>
+    <div class="inside">
+        <p>I am so proud of you.</p>
+        <p>And I always will be.</p>
+        <p>↓↓↓↓↓↓↓ CLICK ↓↓↓↓↓↓↓</p>
+        <a href="#" id="openModalLink">
+            <img src="cat.gif" width="200" height="200" alt="cat">
+        </a>
+
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Happy Birthday Chloe!!</h2>
+        <p>Sorry if there are bugs on this site I tried to make from scratch as much as I could so there's probably Yandere dev levels of code LOL.
+            (DO NOT LOOK AT THE GITHUB REPO)</p>
+        <p>Anyways, happy birthday!!! I am so so so proud of you and how far you've come since I first met you. I'm glad I could join you
+            on your incredible journey of life. You're an amazing person and one of the greatest friends I've ever known. I hope you have an amazing birthday!!! Ilysmmm <3</p>
+        <p> (PS, if you click on the cat something SHOULD happen. It was the hardest part to code LOL.)</p>
+        <div style="text-align:center">
+            <button id="confettiButton" style="background: none; border: none; padding: 0; cursor: pointer;">
+                <img src="cat2.jpg" alt="catington">
+            </button>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById("confettiButton");
+
+        if (button) { // Ensure the button exists before attaching the event listener
+            button.addEventListener("click", () => {
+                // Ensure confetti function is available. It should be global after the CDN loads.
+                if (typeof confetti === 'function') {
+                    const duration = 3000;
+                    const animationEnd = Date.now() + duration;
+                    const defaults = {
+                        startVelocity: 35,
+                        spread: 360,
+                        ticks: 120,
+                        zIndex: 1000
+                    };
+                    const interval = setInterval(() => {
+                        const timeLeft = animationEnd - Date.now();
+                        if (timeLeft <= 0) {
+                            return clearInterval(interval);
+                        }
+                        confetti(Object.assign({}, defaults, {
+                            particleCount: 25,
+                            origin: {
+                                x: Math.random(), // Random x position across the screen
+                                y: Math.random() * 0.2 // Random y position from top 20%
+                            }
+                        }));
+                    }, 150);
+                } else {
+                    console.error("Confetti function not loaded. Check the CDN URL.");
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
